@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Intersect Rectangles</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            #rect_rect_container,
+            #tri_tri_container,
+            #circ_rect_container,
+            #circ_circ_container {
+                width: fit-content;
+            }
+            h2 {
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="circ_rect_container">
+            <canvas id="theCanvas" width="500" height="500">
+                Please upgrade your browser.
+            </canvas>
+            <h2>Circle ∩ Rectangle ∩ Triangle</h2>
+        </div>
+        <div id="circ_circ_container">
+            <canvas id="theCanvas1" width="500" height="500">
+                Please upgrade your browser.
+            </canvas>
+            <h2>Circle ∩ Circle</h2>
+        </div>
+        <div id="rect_rect_container">
+            <canvas id="theCanvas2" width="500" height="500">
+                Please upgrade your browser.
+            </canvas>
+            <h2>Rectangle ∩ Rectangle</h2>
+        </div>
+        <div id="tri_tri_container">
+            <canvas id="theCanvas3" width="500" height="500">
+                Please upgrade your browser.
+            </canvas>
+            <h2>Triangle ∩ Triangle</h2>
+        </div>
+
+        <script src="gl-matrix.js"></script>
+        <script type="text/javascript">
+            // deconstruct glMatrix object.
+            const { mat2, mat3, mat4, vec2, vec3, vec4 } = glMatrix;
+        </script>
+        <script src="util2d.js"></script>
+        <script src="circRec.js"></script>
+    </body>
+</html>
