@@ -62,21 +62,12 @@ function convexPolysIntersect(poly, poly2) {
   }
 
   for (let i = 0; i <= poly.length-1; i++) {
-    if (i != poly.length-1) {
-      for (let ii = 0; ii <= poly2.length-2; ii++) {
-        if (segmentsIntersect(poly[i],poly[i+1],poly2[ii],poly2[ii+1])) {
-          return true;
-        }
-      }
-    } 
-    else {
-      for (let ii = 0; ii <= poly2.length-2; ii++) {
-        if (segmentsIntersect(poly[poly.length-1],poly[0],poly2[ii],poly2[ii+1])) {
-          return true;
-        }
+    for (let ii = 0; ii <= poly2.length-1; ii++) {
+      if (segmentsIntersect(poly[i],poly[(i+1)%poly.length],poly2[ii],poly2[(ii+1)%poly2.length])) {
+        return true;
       }
     }
-  }
+  } 
 
   if (ptsInPoly == poly.length-1 || ptsInPoly2 == poly.length-1) {
     return true;
