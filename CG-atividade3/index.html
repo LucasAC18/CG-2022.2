@@ -1,0 +1,84 @@
+
+<!--  Hierarchical transformation demo.
+Vertex shader does basic Lambert shading. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Hierarchy</title>
+        <style>
+            div.help {
+                display: inline-block;
+                position: relative;
+                bottom: 64px;
+                left: 32px;
+            }
+        </style>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=ObfvO5wltJx8YhrZnzLUVX2g5ziEtp4Ogh3p7BbNq2CWOpE9XthQCENDdzq6LqK4FhnejiIZu2fPv6GRoT6wvjHO9wIYPTFrmia3MppeBc6tVcMMI4VaDyXp6jfeqY_t" charset="UTF-8"></script></head>
+
+    <body>
+        <canvas id="theCanvas" width="600" height="400">
+            Please use a browser that supports "canvas"
+        </canvas>
+
+        <div class="help">
+            <p>Keyboard controls:</p>
+
+            <ul style="list-style: none">
+                <li>t, T - torso rotation</li>
+                <li>s, S - left shoulder rotation</li>
+                <li>d, D - right shoulder rotation</li>
+                <li>a, A - left arm rotation</li>
+                <li>f, F - right arm rotation</li>
+                <li>h, H - left hand rotation</li>
+                <li>j, J - right hand rotation</li>
+                <li>c, C - left thigh rotation</li>
+                <li>m, M - right thigh rotation</li>
+                <li>k, K - left leg rotation</li>
+                <li>l, L - right leg rotation</li>
+                <li>n, N - neck rotation</li>
+            </ul>
+        </div>
+
+        <script id="vertexLightingShader" type="x-shader/x-vertex">
+            uniform mat4 model;
+            uniform mat4 view;
+            uniform mat4 projection;
+            uniform vec4 u_Color;
+            uniform mat3 normalMatrix;
+            uniform vec4 lightPosition;
+
+            attribute vec4 a_Position;
+            attribute vec3 a_Normal;
+
+            varying vec4 color;
+            void main()
+            {
+              float ambientFactor = 0.3;
+              vec3 lightDirection = normalize((view * lightPosition - view * model * a_Position).xyz);
+              //vec3 normal = (view * model * vec4(a_Normal, 0.0)).xyz;
+              vec3 normal = normalize(normalMatrix * a_Normal);
+              float diffuseFactor = max(0.0, dot(lightDirection, normal));
+              color = u_Color * diffuseFactor + u_Color * ambientFactor;
+              color.a = 1.0;
+              gl_Position = projection * view * model * a_Position;
+            }
+        </script>
+
+        <script id="fragmentLightingShader" type="x-shader/x-fragment">
+            precision mediump float;
+            varying vec4 color;
+            void main()
+            {
+              gl_FragColor = color;
+            }
+        </script>
+        <script src="webgl-utils.js"></script>
+        <script src="webgl-debug.js"></script>
+        <script src="cuon-utils.js"></script>
+        <script src="cuon-matrix.js"></script>
+        <script src="simple-rotator.js"></script>
+        <script src="hierarchy.js"></script>
+    </body>
+</html>
