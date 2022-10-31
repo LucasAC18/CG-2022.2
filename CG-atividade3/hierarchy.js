@@ -499,7 +499,7 @@
    loc = gl.getUniformLocation(lightingShader, "u_Color");
    gl.uniform4f(loc, 0.0, 0.8, 0.7, 1.0);
    var loc = gl.getUniformLocation(lightingShader, "lightPosition");
-   gl.uniform4f(loc, 5.0, 10.0, 10.0, 1.0);
+   gl.uniform4f(loc, 5.0, 5.0, 10.0, 1.0);
  
    var modelMatrixloc = gl.getUniformLocation(lightingShader, "model");
    var normalMatrixLoc = gl.getUniformLocation(lightingShader, "normalMatrix");
